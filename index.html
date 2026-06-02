@@ -223,9 +223,11 @@ main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:28px 24p
 </main>
 
 <script>
+var SCRIPT_URL="https://script.google.com/macros/s/AKfycbx5T00Af2dW9cXsNax7Rc1PbbTTzkRpsc3m-hFKjsSxm-Jsx9Ar6WAWic8JQIkJr08h0A/exec";
 var D={};
 
-var SHEETS=Object.keys(D);
+// SHEETS loaded dynamically from Apps Script
+var SHEETS=[];
 var DK=["MON","TUE","WED","THU","FRI","SAT","SUN"];
 var DF=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 var wi=0,sidx=[];
@@ -392,8 +394,25 @@ document.querySelectorAll(".tab").forEach(function(tab){
 document.getElementById("btn-prev").addEventListener("click",function(){if(wi>0){wi--;render();}});
 document.getElementById("btn-next").addEventListener("click",function(){if(wi<SHEETS.length-1){wi++;render();}});
 
-wi=findWeek();
-render();
+// Load sheet list first, then render
+fetch(SCRIPT_URL)
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data.sheets && data.sheets.length){
+      SHEETS=data.sheets;
+    } else {
+      // fallback
+      SHEETS=["02-08 MAR","09-15 MAR","16-22 MAR ","23-29 MAR","30-05 APR","06-12 APR","13-19 APR","20-26 APR","27-03 MAY","04-10 MAY","11-17 MAY","18-24 MAY","25-31 MAY","01-07 JUN","08-14 JUN"];
+    }
+    wi=findWeek();
+    render();
+  })
+  .catch(function(){
+    // fallback if fetch fails
+    SHEETS=["02-08 MAR","09-15 MAR","16-22 MAR ","23-29 MAR","30-05 APR","06-12 APR","13-19 APR","20-26 APR","27-03 MAY","04-10 MAY","11-17 MAY","18-24 MAY","25-31 MAY","01-07 JUN","08-14 JUN"];
+    wi=findWeek();
+    render();
+  });
 </script>
 </body>
 </html>
