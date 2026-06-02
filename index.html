@@ -113,14 +113,14 @@ main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:28px 24p
 .t-ie{background:rgba(230,57,70,.12);color:#e63946;border:1px solid rgba(230,57,70,.25)}
 
 /* TOOLTIP */
-.pill:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:0;
+.pill:hover::after{content:attr(data-tip);position:absolute;top:calc(100% + 8px);left:0;
   background:#ffffff;border:2px solid var(--blue);border-radius:10px;padding:10px 12px;
   font-size:11px;color:var(--text);white-space:pre-wrap;z-index:200;
   min-width:180px;max-width:260px;
   box-shadow:0 8px 24px rgba(29,78,216,.15);pointer-events:none;line-height:1.6;
   font-family:"DM Sans",sans-serif;font-weight:500}
-.pill:hover::before{content:"";position:absolute;bottom:calc(100% + 2px);left:12px;
-  border:6px solid transparent;border-top-color:var(--blue);z-index:201;pointer-events:none}
+.pill:hover::before{content:"";position:absolute;top:calc(100% + 2px);left:12px;
+  border:6px solid transparent;border-bottom-color:var(--blue);z-index:201;pointer-events:none}
 
 /* TEACHER CARDS */
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:13px;margin-bottom:28px}
@@ -177,7 +177,7 @@ main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:28px 24p
       <div id="wlabel">—</div>
       <button class="wbtn" id="btn-next">&#8250;</button>
     </div>
-    <div class="badge"><div class="dot"></div><span>Ready</span></div>
+    <div class="badge"><div class="live-dot"></div><span style="color:#16a34a;font-weight:600">Live</span></div>
   </div>
 </header>
 
@@ -197,7 +197,7 @@ main{position:relative;z-index:1;max-width:1600px;margin:0 auto;padding:28px 24p
       <div class="kcard"><div class="kico">&#128187;</div><div class="klbl">Online Lessons</div><div class="kval" id="kv4">—</div><div class="ksub">remote sessions</div></div>
     </div>
     <div class="two-col">
-      <div class="ccrd"><div class="stitle">Ders per Teacher</div><div id="ct1"></div></div>
+      <div class="ccrd"><div class="stitle">Lessons per Teacher</div><div id="ct1"></div></div>
       <div class="ccrd"><div class="stitle">Lessons per Day</div><div id="ct2"></div></div>
     </div>
   </div>
